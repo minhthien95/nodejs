@@ -1,21 +1,13 @@
 {
-  "name": "expressjs-static-boilerplate",
-  "version": "0.0.1",
-  "private": true,
-  "scripts": {
-    "start": "node server.js"
-  },
+  "name": "online_auction",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Vu Minh Dai<1353006@student.hcmus.edu.vn>",
+  "license": "group2",
   "dependencies": {
-    "express": "^4.1.1",
-    "morgan": "^1.0.0",
-    "body-parser": "^1.0.2",
-    "method-override": "^1.0.0"
-  },
-  "devDependencies": {
-    "grunt": "~0.4.1",
-    "grunt-contrib-uglify": "~0.2.0",
-    "grunt-contrib-cssmin": "~0.6.0",
-    "grunt-contrib-watch": "~0.4.0",
-    "nodemon": "^1.0.17"
+    "body-parser": "^1.15.0",
+    "cors": "^2.7.1",
+    "express": "^4.13.4",
+    "mysql": "^2.10.2"
   }
 }

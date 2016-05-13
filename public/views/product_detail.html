@@ -1,0 +1,143 @@
+<div class="container" ng-controller = "ProductDetailCtr">
+    <div class = "row">
+        <div class="col-xs-10 col-xs-offset-1 col-md-4 col-md-offset-0">
+      		<div class="thumbnail" style="height:420px;" ng-controller = "ImageController">
+                <a ng-bind-html = "ShowImage(image)"></a>
+                <div class="caption" style="margin-top: 65px;">
+                    <din class="row" content = "subImage"></din>
+                </div>
+        	</div>
+
+            <!--Share-->
+            <div id="socialNet" ng-controller="SocialController">
+                <div class="row">
+                    <div id="facebook" class="col-xs-3 col-xs-offset-0 col-md-3">
+                        <iframe ng-src="{{fbshareURL}}" width="119" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+                    </div>
+                        
+                    <div id="twitter" class="col-xs-3 col-xs-offset-0 col-md-3">
+                        <iframe allowtransparency="true" frameborder="0" scrolling="no"
+                                ng-src="{{twitshareURL}}" id = "twitterIcon"></iframe>
+                    </div>
+
+                    <div id="other" class="col-xs-2 col-md-2">
+                        <a ng-click="ggClick()" role="button">
+                        <img src="images/SocialNetIcon/google_plus.png" alt="Share on Google+"/>
+                        </a>
+                    </div>
+
+                    <div id="other" class="col-xs-2 col-md-2">
+                        <a ng-click="linkClick()" role="button">
+                        <img src="images/SocialNetIcon/linkedin.png" alt="Share on Linkedin"/>
+                        </a>
+                    </div>
+                    
+                    <div id="other" class="col-xs-2 col-md-2">
+                        <a ng-click="zingClick()" role="button">
+                        <img src="images/SocialNetIcon/zing.png" alt="Share on ZingMe" width="32px" height="32px"/>
+                        </a>
+                    </div>
+                </div>                
+            </div>
+
+            <div class="row" ng-show="isLoginForRating">
+                <div id="yourRate" class="col-xs-5 col-md-5">
+                    <h3>Your Rate: </h3>
+                </div>
+                <div class="col-xs-7 col-md-7">
+                    <form id="ratingsForm" ng-controller = "RatingProductController" ng-init="getUserRate(pro_id)">
+                        <div class="stars">
+                            <input type="radio" name="star" class="star-1" id="star-1" ng-disabled="isRated" ng-click="ratingPro(1,pro_id)"/>
+                            <label class="star-1" for="star-1">1</label>
+                            <input type="radio" name="star" class="star-2" id="star-2" ng-disabled="isRated" ng-click="ratingPro(2,pro_id)"/>
+                            <label class="star-2" for="star-2">2</label>
+                            <input type="radio" name="star" class="star-3" id="star-3" ng-disabled="isRated" ng-click="ratingPro(3,pro_id)"/>
+                            <label class="star-3" for="star-3">3</label>
+                            <input type="radio" name="star" class="star-4" id="star-4" ng-disabled="isRated" ng-click="ratingPro(4,pro_id)" />
+                            <label class="star-4" for="star-4">4</label>
+                            <input type="radio" name="star" class="star-5" id="star-5" ng-disabled="isRated" ng-click="ratingPro(5,pro_id)"/>
+                            <label class="star-5" for="star-5">5</label>
+                            <span></span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+    	</div>
+
+    	<div class="col-xs-12 col-md-8"  ng-controller = "AuctionBidCtrl">
+        	<h3 style="color:blue; margin-left: 30px;">{{detail.name}}</h3>
+            <div class="row" ng-controller="TimeController">
+                <div class="col-xs-5 col-md-3">
+            	    <h4>Start Date: </h4>
+                    <h4>End Date: </h4>
+                    <h4>Seller: </h4>
+                    <h4>Number of Viewers: </h4>
+                    <h4>Number of Voters: </h4>
+                    <h4>Rate: </h4>
+                    <h4>Number of Bids: </h4>
+                    <h4 style="color:green;">Start Price: </h4>
+                    <h2 id = "timeLive">Time Live: </h2>
+                    <h2 id = "highestBid">Highest Bid: </h2>
+                    <form class="navbar-form navbar-right" role="search" ng-hide="hideBidForm">
+                        <button type="submit" class="btn btn-danger btn-lg" ng-click = "PostPrice()">BID</button>
+                    </form>
+                    <h2 id = "highestBid" ng-show = "showWiner">Winer: </h2>
+                </div>
+
+                <div class="col-xs-7 col-md-4" >
+                    <h4>{{detail.start_day}}</h4> 
+                    <h4>{{detail.end_day}}</h4> 
+                    <h4>{{detail.username}}</h4>
+                    <h4>{{detail.viewers}}</h4>
+                    <div ng-controller = "RateController" ng-init="getRatio(pro_id)">
+                        <h4 >{{count}}</h4>
+                        <h4 ng-bind-html="starIndex(star)"></h4>
+                    </div> 
+                    <h4>{{auctionCount}}</h4>
+                    <h4 style="color:green;">{{detail.price | currency}}</h4>
+                    <div ng-init = "ReverseTime()" style="margin-top:20px;">
+                        <h2 id="hour" class="reverseTime">HH</h2><h2 class="reverseTime">:</h2>
+                        <h2 id="minute" class="reverseTime">MM</h2><h2 class="reverseTime">:</h2>
+                        <h2 id="sencond" class="reverseTime">SS</h2>
+                    </div>
+                    <h2 id = "highestBid">{{maxPrice | currency}}</h2>
+                    <form class="navbar-form navbar-left" role="search" ng-hide="hideBidForm">
+                        <div class="input-group input-group-lg">
+                            <input id="bid" type="text" class="form-control" placeholder="Your Price...." aria-describedby="sizing-addon1">
+                        </div>
+                    </form>
+                    <h2 id = "highestBid" ng-show = "showWiner">{{winer}}</h2>
+                </div>
+
+                <div class="col-xs-12 col-md-5">
+                    <div ng-bind-html = "ListBid(tablebid)"></div>
+                </div>
+            </div>
+            
+            <nav class="pull-right">
+                <ul class="pagination">
+                    <li ng-repeat = "pi in PageTableIndex" ng-class = "PageATablective(pi)" ng-click = "PageTableClick(pi)">
+                        <a href="">{{pi}}<span class="sr-only">(current)</span></a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <div ng-controller = "ChangeContentCtrl">
+        <button type="submit" ng-class="activeBtn(0)" ng-click = "LoadContent(detail.product_id, 0, 0)">Infomation</button>
+        <button type="submit" ng-class="activeBtn(1)" ng-click = "LoadContent(detail.product_id, 1, 0)">Comment</button>
+
+        <hr id = "horizontalLine">
+        <div class="well" style="margin-top: -20px;">
+            <dir id = "dir" content = "content"></dir>
+            <nav class="pull-right">
+                <ul class="pagination">
+                    <li ng-repeat = "pi in PageCommentIndex" ng-class = "PageCommentActive(pi)" ng-click = "PageCommentClick(pi)">
+                        <a href="">{{pi}}<span class="sr-only">(current)</span></a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>

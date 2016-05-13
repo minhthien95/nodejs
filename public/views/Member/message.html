@@ -1,0 +1,143 @@
+<div class="container-fluid" ng-controller= "messageController">
+	<div class="jumbotron">
+		<div class="container">
+			<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+				<ul class="nav nav-pills nav-stacked">
+					<li><a data-toggle="tab" data-target="#draft" class="btn btn-warning">Draft</a></li>
+				  	<li class="active"><a data-toggle="tab" data-target="#inbox">Inbox</a></li>
+				  	<li><a data-toggle="tab" data-target="#sent" ng-click="goSentInbox()">Sent</a></li>
+			
+
+				  	<!--<li ><a data-toggle="tab" data-target="#itemMessage" ng-hide="hideItemMessage">Sent</a></li>-->
+
+				  	<!--<li><a data-toggle="tab"  data-target="#drafting" >Drafting</a></li>-->
+				</ul>
+			</div>
+			<div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+				<div class="tab-content">
+				  <div id="inbox" class="tab-pane fade in active">
+				    <div class="btn-toolbar">
+				    	<div class="panel panel-default">
+				    		<!-- Default panel contents -->
+				    		<!-- Table -->
+				    		<table class="table table-bordered table-hover">
+				    			<thead>
+				    				<tr>
+				    					<th class="col-xs-3 col-sm-2 col-md-2 col-lg-2">Delete</th>
+				    					<th class="col-xs-9 col-sm-10 col-md-10 col-lg-10">Subject</th>
+				    				</tr>
+				    			</thead>
+				    			<tbody ng-repeat = "item in Inbox">
+				    				<tr>
+				    					<td class="col-xs-3 col-sm-2 col-md-2 col-lg-2"><button type="button" class="btn btn-danger" ng-click="goDeleteItemMessage(item)">Delete</button></td>
+				    					<td class="col-xs-9 col-sm-10 col-md-10 col-lg-10"><a  data-toggle="tab" data-target="#itemMessage" ng-click="goItemMessage(item)">{{item.subject}}</a></td>
+				    				</tr>
+				    			</tbody>
+				    		</table>
+				    	</div>
+				    </div>
+				  </div>
+				  <div id="sent" class="tab-pane fade">
+				    	<div class="panel panel-default">
+				    		<!-- Default panel contents -->
+				    		<!-- Table -->
+				    		<table class="table table-bordered table-hover">
+				    			<thead>
+				    				<tr>
+				    					<th class="col-xs-3 col-sm-2 col-md-2 col-lg-2">Delete</th>
+				    					<th class="col-xs-9 col-sm-10 col-md-10 col-lg-10">Subject</th>
+				    				</tr>
+				    			</thead>
+				    			<tbody ng-repeat = "itemSent in SentInbox">
+				    				<tr>
+				    					<td class="col-xs-3 col-sm-2 col-md-2 col-lg-2"><button type="button" class="btn btn-danger">Delete</button></td>
+				    					<td class="col-xs-9 col-sm-10 col-md-10 col-lg-10"><a  data-toggle="tab" data-target="#itemMessage" ng-click="goItemMessage(itemSent)">{{itemSent.subject}} </a></td>
+				    				</tr>
+				    			</tbody>
+				    		</table>
+				    	</div>
+				  </div>
+				  <div id="itemMessage" class="tab-pane fade">
+				  		<div class="panel panel-default">
+				  			<div class="panel-body">
+								<div class="form-group col-xs-12">
+									<label for="input" class="col-xs-2 col-sm-2 col-md-2 col-lg-2 control-label">To:</label>
+									<div class=" col-sm-10 ">
+										<input type="text" class="form-control disabled" value="{{itemM.receiveEmail}}" required="required" placeholder="Exp: User@example.io" >
+									</div>
+								</div>
+								<div class="panel-body"></div>				
+								<div class="form-group col-xs-12">
+									<label for="input" class="col-sm-2 control-label">Subject:</label>
+									<div class="col-sm-10">
+										<input type="text"  class="form-control disabled" value="{{itemM.subject}}" required="required" >
+									</div>
+								</div>
+								<div class="panel-body"></div>
+								<div class="form-group col-xs-12">
+									<div class="col-sm-12">
+										<textarea  style="resize:none; height: 300px;"  class="form-control noresize disabled" rows="3" required="required">{{itemM.content}}</textarea>
+									</div>
+								</div>
+								<div class="panel-body"></div>
+								<form class="form-inline pull-right" role="form">
+									<a href ="#message" type="button"  class="btn btn-warning">back</a>
+								</form>
+							</div>
+				  		</div>
+				  </div>
+				  <div id="drafting" class="tab-pane fade">
+				    	<div class="panel panel-default">
+				    		<!-- Default panel contents -->
+				    		<!-- Table -->
+				    		<table class="table table-bordered table-hover">
+				    			<thead>
+				    				<tr>
+				    					<th class="col-xs-3 col-sm-2 col-md-2 col-lg-2">Delete</th>
+				    					<th class="col-xs-9 col-sm-10 col-md-10 col-lg-10">Subject</th>
+				    				</tr>
+				    			</thead>
+				    			<tbody ng-repeat = "item in Drafting">
+				    				<tr>
+				    					<td class="col-xs-3 col-sm-2 col-md-2 col-lg-2"><button type="button" class="btn btn-danger">Delete</button></td>
+				    					<td class="col-xs-9 col-sm-10 col-md-10 col-lg-10">{{item.subject}}</td>
+				    				</tr>
+				    			</tbody>
+				    		</table>
+				    	</div>
+				  </div>
+				  <div id="draft" class="tab-pane fade">
+					<div class="panel panel-primary">
+						<div class="panel-body">
+							<div class="form-group col-xs-12">
+								<label for="input" class="col-xs-2 col-sm-2 col-md-2 col-lg-2 control-label">To:</label>
+								<div class=" col-sm-10 ">
+									<input type="text" id="inputTo" class="form-control" value="" required="required" placeholder="Exp: User@example.io" >
+								</div>
+							</div>
+							<div class="panel-body"></div>										
+							<div class="form-group col-xs-12">
+								<label for="input" class="col-sm-2 control-label">Subject:</label>
+								<div class="col-sm-10">
+									<input type="text" id="inputSubject" class="form-control" value="" required="required" >
+								</div>
+							</div>
+							<div class="panel-body"></div>
+							<div class="form-group col-xs-12">
+								<div class="col-sm-12">
+									<textarea  style="resize:none; height: 300px;" id="txtContent" class="form-control noresize" rows="3" required="required"></textarea>
+								</div>
+							</div>
+							<div class="panel-body"></div>
+							<form class="form-inline pull-right" role="form">
+								<a href ="#message" type="button" class="btn btn-success" ng-click="SendMessage()">Send</a>
+								<a href ="#message" type="button"  class="btn btn-warning">Cancle</a>
+							</form>
+						</div>
+					</div>
+				  </div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

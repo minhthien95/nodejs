@@ -1,47 +1,39 @@
-Express JS Static Boilerplate
-============================
+# node-js-getting-started
 
-Express.js 4.0 Static Boilerplate is a simple Node.js Server using static files and directories for quick quality development and/or production.
+A barebones Node.js app using [Express 4](http://expressjs.com/).
 
-Features
------------
-- Static directory and files
-- Server watch for changes (Nodemon)
-- Grunt JS (Files Watch, CSS min, JS uglify)
-- no Jade
+This application supports the [Getting Started with Node on Heroku](https://devcenter.heroku.com/articles/getting-started-with-nodejs) article - check it out.
 
-Usage
------------
-On your terminal.
+## Running Locally
 
-Install the node packages.
-```ruby
-sudo npm install
+Make sure you have [Node.js](http://nodejs.org/) and the [Heroku Toolbelt](https://toolbelt.heroku.com/) installed.
+
+```sh
+$ git clone git@github.com:heroku/node-js-getting-started.git # or clone your own fork
+$ cd node-js-getting-started
+$ npm install
+$ npm start
 ```
 
-Run the server
-```ruby
-nodemon server.js
+Your app should now be running on [localhost:5000](http://localhost:5000/).
+
+## Deploying to Heroku
+
 ```
-
-To watch and run the Grunt.js task on any change to your main files "app.js, app.css"
-```ruby
-grunt watch
+$ heroku create
+$ git push heroku master
+$ heroku open
 ```
+or
 
-Want to do manually?! no problem.
-```ruby
-grunt build
-```
+[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
-Open your browser on the address 'localhost:3000'
+## Documentation
 
-Done!
+For more information about using Node.js on Heroku, see these Dev Center articles:
 
-Author
------------
-Michael Lancaster
-
-License
------------
-MIT
+- [Getting Started with Node.js on Heroku](https://devcenter.heroku.com/articles/getting-started-with-nodejs)
+- [Heroku Node.js Support](https://devcenter.heroku.com/articles/nodejs-support)
+- [Node.js on Heroku](https://devcenter.heroku.com/categories/nodejs)
+- [Best Practices for Node.js Development](https://devcenter.heroku.com/articles/node-best-practices)
+- [Using WebSockets on Heroku with Node.js](https://devcenter.heroku.com/articles/node-websockets)

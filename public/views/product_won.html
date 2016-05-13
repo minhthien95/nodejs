@@ -1,0 +1,55 @@
+<div class="container" ng-controller = "ProductWonController">
+	
+	<div class="row">
+		<div class="col-xs-6 col-md-3 col-sm-4" ng-repeat="product in userResult">
+	  		<div class="thumbnail" style="height:430px;" ng-controller = "ImageController" ng-init = "FindImage(product.product_id)">
+		      	<img ng-src="images/Products/{{mainImage}}" alt="">
+		      	<div class="caption">
+    		  		<a href="#product_detail/product_id={{product.product_id}}">
+    		  			<h3 class="text-center" style="color:red;" >{{product.name}}</h3>
+    		  		</a>
+    		  		<h4>Seller: {{product.owner_name}}</h4>
+	        		<div ng-controller = "RateController" ng-init = "getRatio(product.product_id)" >
+	        			<h4 id="rateDisplay">Rate: </h4>
+		        		<h4 ng-bind-html = "starIndex(star)" id="rateDisplay"></h4>
+	        		</div>
+		        	<h4 style="color: blue;">Price Won: {{product.price | currency}}</h4>
+		        	<center><button class="btn btn-danger" ng-click="OpenPayment(product.product_id)">Choose Payment</button></center>
+	      		</div>
+	    	</div>
+		</div>
+	</div>
+	
+	<div class="row" ng-show="ShowPayment">
+		<hr id = "horizontalLine">
+		<div class="row">
+			<div class="col-xs-4 col-md-2" style="margin-top: 10px;">
+				<!-- thanh toán bảo kim -->
+				<a href="https://www.baokim.vn/payment/product/version11?business=minhthien1995%40gmail.com&id={{productID}}&order_description=&product_name={{productName}}&product_price={{productPriceVND}}&product_quantity=1&total_amount={{productPriceVND}}&url_cancel=&url_detail=&url_success="><img src="http://www.baokim.vn/developers/uploads/baokim_btn/paynow-l.png" alt="Thanh toán an toàn với Bảo Kim !" border="0" title="Thanh toán trực tuyến an toàn dùng tài khoản Ngân hàng (VietcomBank, TechcomBank, Đông Á, VietinBank, Quân Đội, VIB, SHB,... và thẻ Quốc tế (Visa, Master Card...) qua Cổng thanh toán trực tuyến BảoKim.vn"></a>
+			</div>
+
+			<div class="col-xs-4 col-xs-offset-5 col-md-2 col-md-offset-0" style="margin-top: 10px;">
+				<!-- thanh toán ngân lượng -->
+				<a target="_blank" href="https://www.nganluong.vn/button_payment.php?receiver=minhthien1995@gmail.com&product_name={{productName}}&price={{productPriceVND}}&return_url=(URL thanh toán thành công)&comments=(Ghi chú về đơn hàng)"><img src="https://www.nganluong.vn//css/newhome/img/button/pay-lg.png"border="0" /></a>
+			</div>
+
+			<div class="col-xs-4 col-xs-offset-5 col-md-2 col-md-offset-0" style="margin-top: 15px;">
+				<!-- thanh toán paypal -->
+				<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+			      <input type="hidden" name="cmd" value="_xclick">
+			      <input type="hidden" name="business" value="minhthien1995@gmail.com">
+			      <input type="hidden" name="lc" value="US">
+			      <input type="hidden" name="item_name" value="{{productName}}">
+			      <input type="hidden" name="item_number" value="{{productID}}">
+			      <input type="hidden" name="amount" value="{{productPriceUSD}}">
+			      <input type="hidden" name="currency_code" value="USD">
+			      <input type="hidden" name="button_subtype" value="services">
+			      <input type="hidden" name="no_note" value="0">
+			      <input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynowCC_LG.gif:NonHostedGuest">
+			      <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+			      <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+			    </form>
+			</div>
+		</div>
+	</div>
+</div>

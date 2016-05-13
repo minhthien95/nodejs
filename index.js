@@ -12,11 +12,11 @@ var port = 3000;
 var ip = '127.0.0.1';
 
 var connection = mysql.createConnection({
-    host: 'localhost',
+    host: '103.18.6.83',
     port: 3306,
-    user: 'root',
-    password: '',
-    database: 'online_auction'
+    user: 'b14717_thien',
+    password: '123456',
+    database: 'b14717_thien'
 });
 
 app.use(bodyParser.urlencoded({
